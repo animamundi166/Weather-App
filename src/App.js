@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import getCurrentWeather from './API/getCurrentWeather';
+import CurrentWeather from './CurrentWeather/CurrentWeather';
+import InputComponent from './InputComponent/InputComponent';
 
-function App() {
+const App = () => {
+
+  const [data, setData] = useState(null);
+
+  const searchCity = async (city) => {
+    setData(null);
+    const newCurrentWeather = await getCurrentWeather(city);
+    setData(newCurrentWeather);
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <InputComponent searchCity={searchCity} />
+      {/* {!data && <img src="./images/loading.svg" className="loader" alt='loader' />} */}
+      {data && <CurrentWeather data={data} />}
     </div>
   );
 }
