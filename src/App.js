@@ -10,6 +10,8 @@ const App = () => {
 
   const [dataCurrent, setDataCurrent] = useState(null);
   const [dataForecast, setDataForecast] = useState(null);
+
+
   const [isWarning, setIsWarning] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,10 +21,10 @@ const App = () => {
       setDataCurrent(null);
       setDataForecast(null);
       setIsWarning(false);
-      const newCurrentWeather = await getCurrentWeather(city);
-      const newForecastWeather = await getForecastWeather(city);
-      setDataCurrent(newCurrentWeather);
-      setDataForecast(newForecastWeather);
+      const dataCurrentWeather = await getCurrentWeather(city);
+      const dataForecastWeather = await getForecastWeather(city);
+      setDataCurrent(dataCurrentWeather);
+      setDataForecast(dataForecastWeather);
       setIsLoading(false);
     } catch (error) {
       setIsWarning(true);

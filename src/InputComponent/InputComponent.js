@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Geo from "../geoPosition/geoPosition";
 import WarningDiv from "../WarningDiv/WarningDiv";
 
 const InputComponent = ({ searchCity, warning, loading }) => {
@@ -11,12 +12,13 @@ const InputComponent = ({ searchCity, warning, loading }) => {
   }
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter")
+    if (e.key === 'Enter')
       handleButtonClick();
   }
 
   const handleButtonClick = () => {
     searchCity(city);
+    setCity('');
   }
 
   return (
@@ -39,6 +41,7 @@ const InputComponent = ({ searchCity, warning, loading }) => {
             disabled={loading}>
             Search
           </button>
+          <Geo />
         </div>
         {warning && <WarningDiv />}
       </div>
