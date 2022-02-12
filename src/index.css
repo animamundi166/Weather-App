@@ -245,8 +245,8 @@ body {
 }
 
 .info {
-    /* display: grid;
-    grid-template-columns: 1fr 1fr; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-top: 24px;
     column-gap: 20px;
 }

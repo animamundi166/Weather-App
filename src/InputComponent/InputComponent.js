@@ -1,7 +1,7 @@
 import { useState } from "react";
 import WarningDiv from "../WarningDiv/WarningDiv";
 
-const InputComponent = ({ searchCity, warning }) => {
+const InputComponent = ({ searchCity, warning, loading }) => {
 
   const today = new Date().toLocaleDateString();
   const [city, setCity] = useState("");
@@ -16,8 +16,6 @@ const InputComponent = ({ searchCity, warning }) => {
   }
 
   const handleButtonClick = () => {
-    if (city.trim() === "")
-      return;
     searchCity(city);
   }
 
@@ -35,7 +33,12 @@ const InputComponent = ({ searchCity, warning }) => {
             onKeyPress={handleKeyPress}
             value={city}
           />
-          <button className="button" onClick={handleButtonClick}>Search</button>
+          <button
+            className="button"
+            onClick={handleButtonClick}
+            disabled={loading}>
+            Search
+          </button>
         </div>
         {warning && <WarningDiv />}
       </div>

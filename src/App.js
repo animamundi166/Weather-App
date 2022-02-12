@@ -1,25 +1,32 @@
 import { useState } from 'react';
 import getCurrentWeather from './API/getCurrentWeather';
+import getForecastWeather from './API/getForecastWeather';
 import CurrentWeather from './CurrentWeather/CurrentWeather';
+import ForecastWeather from './ForecastWeather/ForecastWeather';
 import InputComponent from './InputComponent/InputComponent';
 import Loader from './Loader/Loader';
 
 const App = () => {
 
-  const [data, setData] = useState(null);
-  const [warning, setWarning] = useState(false);
+  const [dataCurrent, setDataCurrent] = useState(null);
+  const [dataForecast, setDataForecast] = useState(null);
+  const [isWarning, setIsWarning] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const searchCity = async (city) => {
     try {
       setIsLoading(true);
-      setData(null);
-      setWarning(false);
+      setDataCurrent(null);
+      setDataForecast(null);
+      setIsWarning(false);
       const newCurrentWeather = await getCurrentWeather(city);
-      setData(newCurrentWeather);
+      const newForecastWeather = await getForecastWeather(city);
+      setDataCurrent(newCurrentWeather);
+      setDataForecast(newForecastWeather);
       setIsLoading(false);
     } catch (error) {
-      setWarning(true);
+      setIsWarning(true);
+      setIsLoading(false);
       console.log(error);
     }
   }
@@ -27,9 +34,10 @@ const App = () => {
 
   return (
     <div>
-      <InputComponent searchCity={searchCity} warning={warning} />
+      <InputComponent searchCity={searchCity} warning={isWarning} loading={isLoading} />
       {isLoading && <Loader />}
-      {data && <CurrentWeather data={data} />}
+      {dataCurrent && <CurrentWeather data={dataCurrent} />}
+      {dataForecast && <ForecastWeather data={dataForecast} />}
     </div>
   );
 }
