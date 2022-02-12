@@ -4,7 +4,6 @@ import WarningDiv from "../WarningDiv/WarningDiv";
 const InputComponent = ({ searchCity, warning }) => {
 
   const today = new Date().toLocaleDateString();
-
   const [city, setCity] = useState("");
 
   const handleInputChange = (e) => {

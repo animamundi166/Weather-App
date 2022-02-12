@@ -25,6 +25,8 @@ body {
     animation-name: spin;
     animation-duration: 1s;
     animation-iteration-count: infinite;
+    display: flex;
+    
 }
 
 @keyframes spin {
