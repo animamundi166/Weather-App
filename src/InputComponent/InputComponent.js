@@ -1,6 +1,7 @@
 import { useState } from "react";
+import WarningDiv from "../WarningDiv/WarningDiv";
 
-const InputComponent = ({ searchCity }) => {
+const InputComponent = ({ searchCity, warning }) => {
 
   const today = new Date().toLocaleDateString();
 
@@ -37,10 +38,9 @@ const InputComponent = ({ searchCity }) => {
           />
           <button className="button" onClick={handleButtonClick}>Search</button>
         </div>
-        <div className="error hidden">Oops, Something Went Wrong.</div>
+        {warning && <WarningDiv />}
       </div>
     </>
-
   )
 };
 

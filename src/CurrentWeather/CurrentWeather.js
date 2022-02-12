@@ -22,7 +22,11 @@ const CurrentWeather = ({ data }) => {
             <span className="uppercase">{data.name}</span>
             <span className="type">{data.weather[0].description}</span>
           </div>
-          <img className="icon" src={"https://openweathermap.org/img/wn/" + data.weather[0].icon + ".png"} alt='icon' />
+          <img
+            className="icon"
+            src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
+            alt={data.weather[0].description}
+          />
           <div className="temp">
             <div className="temp-value">
               <div className="temp-value-ui">{temp}</div>

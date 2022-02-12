@@ -171,7 +171,7 @@ body {
 }
 
 .temp-type {
-    cursor: pointer;
+    /* cursor: pointer; */
     background-color: transparent;
     opacity: 0.4;
     outline: none;
@@ -243,8 +243,8 @@ body {
 }
 
 .info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
     margin-top: 24px;
     column-gap: 20px;
 }
