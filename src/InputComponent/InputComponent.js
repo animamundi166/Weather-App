@@ -1,13 +1,19 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import Geo from "../geoPosition/geoPosition";
+import { getDataCurrent, getDataForecast, resetWarning } from "../store/dataWeather";
 import WarningDiv from "../WarningDiv/WarningDiv";
 
-const InputComponent = ({ searchCity, warning, loading }) => {
+const InputComponent = () => {
 
-  const today = new Date().toLocaleDateString();
+  const { isWarning, isLoading } = useSelector(store => store.dataWeather);
+  const dispatch = useDispatch();
   const [city, setCity] = useState("");
 
+  const today = new Date().toLocaleDateString();
+
   const handleInputChange = (e) => {
+    dispatch(resetWarning());
     setCity(e.target.value);
   }
 
@@ -17,9 +23,11 @@ const InputComponent = ({ searchCity, warning, loading }) => {
   }
 
   const handleButtonClick = () => {
-    searchCity(city);
+    dispatch(getDataCurrent(city));
+    dispatch(getDataForecast(city));
     setCity('');
   }
+
 
   return (
     <>
@@ -33,17 +41,18 @@ const InputComponent = ({ searchCity, warning, loading }) => {
             type="text"
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
+            // onFocus={handleFocus}
             value={city}
           />
           <button
             className="button"
             onClick={handleButtonClick}
-            disabled={loading}>
+            disabled={isLoading}>
             Search
           </button>
           <Geo />
         </div>
-        {warning && <WarningDiv />}
+        {isWarning && <WarningDiv />}
       </div>
     </>
   )

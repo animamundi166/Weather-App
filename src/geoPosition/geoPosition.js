@@ -1,36 +1,24 @@
-import { useState } from 'react';
-import getGeoCurrent from '../API/getGeoCurrent';
+import { useDispatch } from 'react-redux';
+import { getGeo } from '../store/dataWeather';
 import geo from './map.svg';
 
-const Geo = ({ onGeo }) => {
+const Geo = () => {
 
-  const [dataGeoCurrent, setDataGeoCurrent] = useState({});
-
+  const dispatch = useDispatch();
 
   const getPos = () => {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  }
+  };
 
   const onSuccess = (pos) => {
     const lat = pos.coords.latitude;
-    const lng = pos.coords.longitude;
-    getGeo(lat, lng);
-  }
+    const lon = pos.coords.longitude;
+    dispatch(getGeo({ lat, lon }));
+  };
 
   const onError = () => {
     alert('Geolocation is not available');
-  }
-
-  const getGeo = async (lat, lng) => {
-    try {
-      setDataGeoCurrent(null);
-      const geoCurrentPos = await getGeoCurrent(lat, lng);
-      setDataGeoCurrent(geoCurrentPos);
-      console.log(geoCurrentPos);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  };
 
   return (
     <button className="button button-geolocation" onClick={getPos}>

@@ -1,9 +1,9 @@
 import ForecastWeatherTitle from "./ForecastWeatherTitle";
 
-const ForecastWeather = ({ data }) => {
+const ForecastWeather = () => {
 
   return (
-    <ForecastWeatherTitle data={data} />
+    <ForecastWeatherTitle />
   )
 };
 

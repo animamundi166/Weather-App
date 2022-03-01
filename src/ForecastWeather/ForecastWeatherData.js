@@ -1,4 +1,10 @@
-const ForecastWeatherData = ({ data }) => {
+import { useSelector } from "react-redux";
+
+const ForecastWeatherData = () => {
+
+  const { dataForecast } = useSelector(store => store.dataWeather);
+  const data = dataForecast;
+
 
   function forecastDay(item) {
     const date = new Date(item.dt * 1e3);

@@ -1,12 +1,16 @@
+import { useSelector } from "react-redux";
 import ForecastWeatherData from "./ForecastWeatherData";
 
-const ForecastWeatherTitle = ({ data }) => {
+const ForecastWeatherTitle = () => {
+
+  const { dataForecast } = useSelector(store => store.dataWeather);
+  const data = dataForecast;
 
   return (
     <div className="container container-forecast">
       <div className="container-title">{data.list.length}-day forecast</div>
       <div className="forecast">
-        <ForecastWeatherData data={data} />
+        <ForecastWeatherData />
       </div>
     </div>
 
