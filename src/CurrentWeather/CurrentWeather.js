@@ -4,7 +4,6 @@ const CurrentWeather = () => {
 
   const { dataCurrent } = useSelector(store => store.dataWeather);
   const data = dataCurrent;
-  console.log(data);
 
   function padTo2Digits(num) {
     return String(num).padStart(2, '0');

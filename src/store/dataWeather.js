@@ -2,6 +2,7 @@ import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit"
 import getCurrentWeather from "../API/getCurrentWeather";
 import getForecastWeather from "../API/getForecastWeather";
 import getGeoCurrent from "../API/getGeoCurrent";
+import getGeoForecast from "../API/getGeoForecast";
 
 export const getDataCurrent = createAsyncThunk('getDataCurrent', (city) => {
   return getCurrentWeather(city);
@@ -13,6 +14,10 @@ export const getDataForecast = createAsyncThunk('getDataForecast', (city) => {
 
 export const getGeo = createAsyncThunk('getGeo', (params) => {
   return getGeoCurrent(params.lat, params.lon);
+});
+
+export const getGeo16 = createAsyncThunk('getGeo16', (params) => {
+  return getGeoForecast(params.lat, params.lon);
 });
 
 export const resetWarning = createAction('resetWarning');
@@ -63,6 +68,21 @@ const weatherReducer = createReducer(initialState, (builder) => {
   });
   builder.addCase(getGeo.rejected, (state) => {
     state.dataCurrent = null;
+    state.isLoading = false;
+    state.isWarning = true;
+  });
+
+  builder.addCase(getGeo16.pending, (state) => {
+    state.isWarning = false;
+    state.isLoading = true;
+    state.dataForecast = null;
+  });
+  builder.addCase(getGeo16.fulfilled, (state, action) => {
+    state.dataForecast = action.payload;
+    state.isLoading = false;
+  });
+  builder.addCase(getGeo16.rejected, (state) => {
+    state.dataForecast = null;
     state.isLoading = false;
     state.isWarning = true;
   });

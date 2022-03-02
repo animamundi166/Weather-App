@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { getGeo } from '../store/dataWeather';
+import { getGeo, getGeo16 } from '../store/dataWeather';
 import geo from './map.svg';
 
 const Geo = () => {
@@ -14,6 +14,7 @@ const Geo = () => {
     const lat = pos.coords.latitude;
     const lon = pos.coords.longitude;
     dispatch(getGeo({ lat, lon }));
+    dispatch(getGeo16({ lat, lon }));
   };
 
   const onError = () => {
